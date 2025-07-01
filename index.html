@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="th">
+  <head>
+    <link rel="icon" href="https://s359.kapook.com/pagebuilder/fdc1cb5a-db3a-40e2-a9ba-2329a85ad32c.jpg" type="image/png" />
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Quiz</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      const questionData = [
+        {
+          question: "1. วันเกิดของไกด์วันที่เท่าไหร่?",
+          correct: "17 มีนาคม 2546",
+          options: ["17 มีนาคม 2546", "18 มีนาคม 2546", "16 มีนาคม 2546", "17 มีนาคม 2545"],
+        },
+        {
+          question: "2. วันครบรอบวันที่เท่าไหร่?",
+          correct: "20 พฤศจิกายน 2566",
+          options: ["20 พฤศจิกายน 2566", "21 พฤศจิกายน 2566", "20 ธันวาคม 2566", "19 พฤศจิกายน 2566"],
+        },
+        {
+          question: "3. ไกด์ชอบกินอะไรมากที่สุด?",
+          correct: "ก๋วยเตี๋ยวเรือ",
+          options: ["ก๋วยเตี๋ยวเรือ", "ก๋วยเตี๋ยวต้มยำ", "ก๋วยเตี๋ยวลุยสวน", "ไก่ทอด"],
+        },
+        {
+          question: "4. ไกด์ส่วนสูงเท่าไหร่?",
+          correct: "160",
+          options: ["160", "158", "165", "162"],
+        },
+        {
+          question: "5. เราอยู่ด้วยกันมากี่วันแล้ว?",
+          correct: "{DAYS_TOGETHER} วัน",
+          options: ["{DAYS_TOGETHER} วัน", "546 วัน", "452 วัน", "637 วัน"],
+        },
+        {
+          question: "6. เราเจอกันได้ยังไง?",
+          correct: "tinder",
+          options: ["tinder", "facebook", "ig", "บังเอิญเจอ"],
+        },
+        {
+          question: "7. ไกด์ชอบอะไรมากที่สุด?",
+          correct: "มาย",
+          options: ["มาย", "แมว", "คอม", "หมา"],
+        },
+        {
+          question: "8. สถานที่แรกที่เราเจอกัน?",
+          correct: "ยูเนี่ยนมอล์",
+          options: ["ยูเนี่ยนมอล์", "เซ็นลาด", "ฟิวเจอร์", "สวนจตุจักร"],
+        },
+        {
+          question: "9. สีที่ไกด์ชอบ?",
+          correct: "ม่วง",
+          options: ["ม่วง", "ฟ้า", "เขียว", "ชมพู"],
+        },
+        {
+          question: "10. งานที่ไกด์ทำคืออะไร?",
+          correct: "SA",
+          options: ["PM", "SA", "Dev", "BA"],
+        },
+      ];
+
+      const daysTogether = () => {
+        const start = new Date("2023-11-20T00:00:00+07:00");
+        const today = new Date();
+        const diffTime = Math.abs(today - start);
+        return Math.floor(diffTime / (1000 * 60 * 60 * 24));
+      };
+
+      function shuffle(array) {
+        for (let i = array.length - 1; i > 0; i--) {
+          const j = Math.floor(Math.random() * (i + 1));
+          [array[i], array[j]] = [array[j], array[i]];
+        }
+      }
+
+      window.addEventListener("DOMContentLoaded", () => {
+        const passwordScreen = document.getElementById("password-screen");
+        const welcomeScreen = document.getElementById("welcome-screen");
+        const quizScreen = document.getElementById("quiz-screen");
+        const resultScreen = document.getElementById("result-screen");
+        const questionContainer = document.getElementById("question-container");
+        const nextBtn = document.getElementById("next-btn");
+        const backBtn = document.getElementById("back-btn");
+
+        let currentQuestion = 0;
+        const userAnswers = [];
+
+        document.getElementById("submit-password").addEventListener("click", () => {
+          const pw = document.getElementById("password-input").value.trim();
+          if (pw === "love") {
+            passwordScreen.classList.add("hidden");
+            welcomeScreen.classList.remove("hidden");
+          } else {
+            alert("รหัสผ่านไม่ถูกต้องนะ ลองใหม่อีกครั้ง 💔");
+          }
+        });
+
+        document.getElementById("start-btn").addEventListener("click", () => {
+          welcomeScreen.classList.add("hidden");
+          quizScreen.classList.remove("hidden");
+          questionData[4].options[0] = `${daysTogether()} วัน`;
+          questionData[4].correct = `${daysTogether()} วัน`;
+          renderQuestion();
+        });
+
+        nextBtn.addEventListener("click", () => {
+          saveAnswer();
+          currentQuestion++;
+          if (currentQuestion < questionData.length) {
+            renderQuestion();
+          } else {
+            showResult();
+          }
+        });
+
+        backBtn.addEventListener("click", () => {
+          if (currentQuestion > 0) {
+            currentQuestion--;
+            renderQuestion();
+          }
+        });
+
+        document.getElementById("restart-btn").addEventListener("click", () => {
+          resultScreen.classList.add("hidden");
+          passwordScreen.classList.remove("hidden");
+          document.getElementById("password-input").value = "";
+          currentQuestion = 0;
+          userAnswers.length = 0;
+          questionContainer.innerHTML = "";
+        });
+
+        function saveAnswer() {
+          const selected = document.querySelector("input[name='answer']:checked");
+          userAnswers[currentQuestion] = selected ? selected.value : null;
+        }
+
+        function renderQuestion() {
+          const q = questionData[currentQuestion];
+          const options = [...q.options];
+          shuffle(options);
+          const catImage = `<img src='https://cataas.com/cat/says/Meow?${Math.random()}' alt='meme cat' class='w-full max-h-72 object-cover rounded-lg mb-4'/>`;
+          questionContainer.innerHTML = catImage + `
+            <div class="space-y-2">
+              <p class="font-semibold">${q.question}</p>
+              ${options
+                .map(
+                  (opt) => `
+                <label class="block">
+                  <input type="radio" name="answer" value="${opt}" ${
+                    userAnswers[currentQuestion] === opt ? "checked" : ""
+                  } /> ${opt}
+                </label>`
+                )
+                .join("")}
+            </div>
+          `;
+        }
+
+        function showResult() {
+          quizScreen.classList.add("hidden");
+          resultScreen.classList.remove("hidden");
+
+          let score = 0;
+          for (let i = 0; i < questionData.length; i++) {
+            if (userAnswers[i] === questionData[i].correct) score++;
+          }
+
+          document.getElementById("score").textContent = `คุณได้ ${score} คะแนน!`;
+          const level =
+            score <= 3
+              ? "ระดับ: พึ่งรู้จัก 💬"
+              : score <= 6
+              ? "ระดับ: เริ่มสนิท 😊"
+              : score <= 9
+              ? "ระดับ: แฟนเหนื่อขั้น 💕"
+              : "ระดับ: ปาปารัสซี่ 📸!";
+          document.getElementById("message").textContent = level;
+        }
+      });
+    </script>
+  </head>
+  <body class="bg-gradient-to-br from-purple-100 via-pink-100 to-white min-h-screen flex items-center justify-center p-4">
+    <div class="max-w-md w-full bg-white rounded-3xl shadow-xl p-6 space-y-6">
+      <div id="password-screen" class="text-center space-y-4">
+        <h1 class="text-xl font-bold text-purple-700">🔒 กรุณาใส่รหัสผ่านก่อนเริ่ม</h1>
+        <input id="password-input" type="text" placeholder="ใส่รหัสผ่านที่นี่ (hint: love)" class="w-full border rounded px-4 py-2" />
+        <button id="submit-password" class="bg-pink-400 hover:bg-pink-500 text-white px-6 py-2 rounded-full">ตกลง</button>
+      </div>
+
+      <div id="welcome-screen" class="hidden text-center space-y-4">
+        <h1 class="text-2xl font-bold text-purple-700">🩷 ยินดีต้อนรับเข้าสู่แบบทดสอบของไกด์ 💜</h1>
+        <p class="text-gray-600">กดเริ่มเลยเพื่อพิสูจน์ความรู้ใจไกด์</p>
+        <button id="start-btn" class="bg-purple-500 hover:bg-purple-600 text-white px-6 py-2 rounded-full">เริ่มเลย</button>
+      </div>
+
+      <div id="quiz-screen" class="hidden">
+        <div id="question-container" class="space-y-4"></div></br>
+        <div class="flex justify-between gap-2">
+          <button id="back-btn" class="bg-gray-300 hover:bg-gray-400 text-gray-800 px-4 py-2 rounded-full">ย้อนกลับ</button>
+          <button id="next-btn" class="bg-pink-400 hover:bg-pink-500 text-white px-4 py-2 rounded-full">ถัดไป</button>
+        </div>
+      </div>
+
+      <div id="result-screen" class="hidden text-center space-y-4">
+        <h2 class="text-xl font-bold text-purple-700">ผลลัพธ์ 💘</h2>
+        <p id="score" class="text-lg"></p>
+        <p id="message"></p>
+        <button id="restart-btn" class="bg-purple-400 hover:bg-purple-500 text-white px-4 py-2 rounded-full">เริ่มใหม่อีกครั้ง</button>
+      </div>
+    </div>
+  </body>
+</html>
