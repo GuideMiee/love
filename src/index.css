@@ -1,0 +1,147 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ── Base ──────────────────────────────────────────────────────── */
+@layer base {
+  *, *::before, *::after { box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; -webkit-font-smoothing: antialiased; }
+
+  body {
+    background-color: #0e0e0e;
+    color: #fff;
+    font-family: 'Inter', sans-serif;
+    overflow-x: hidden;
+    cursor: none;
+  }
+
+  ::selection {
+    background: rgba(223,142,255,.22);
+    color: #df8eff;
+  }
+
+  ::-webkit-scrollbar       { width: 4px; }
+  ::-webkit-scrollbar-track { background: #0e0e0e; }
+  ::-webkit-scrollbar-thumb { background: #494847; border-radius: 99px; }
+  ::-webkit-scrollbar-thumb:hover { background: #df8eff; }
+}
+
+/* ── Custom Cursor ─────────────────────────────────────────────── */
+@layer components {
+  .cursor-dot {
+    position: fixed;
+    width: 8px; height: 8px;
+    background: #df8eff;
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 9999;
+    transform: translate(-50%, -50%);
+    mix-blend-mode: screen;
+    transition: width .25s, height .25s;
+  }
+  .cursor-ring {
+    position: fixed;
+    width: 34px; height: 34px;
+    border: 1.5px solid rgba(223,142,255,.5);
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 9998;
+    transform: translate(-50%, -50%);
+    transition: width .3s, height .3s, border-color .3s;
+  }
+  .cursor-dot.hovered  { width: 12px; height: 12px; }
+  .cursor-ring.hovered { width: 56px; height: 56px; border-color: rgba(223,142,255,.9); }
+}
+
+/* ── Glass ─────────────────────────────────────────────────────── */
+@layer components {
+  .glass {
+    background: rgba(255,255,255,.05);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+  }
+  .glass-card {
+    background: rgba(38,38,38,.4);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+  }
+  .nav-glass {
+    background: rgba(18,2,36,.72);
+    backdrop-filter: blur(24px);
+    -webkit-backdrop-filter: blur(24px);
+  }
+}
+
+/* ── Neon ──────────────────────────────────────────────────────── */
+@layer components {
+  .neon-glow  { filter: drop-shadow(0 0 8px rgba(223,142,255,.6)); }
+  .neon-text  { text-shadow: 0 0 20px rgba(223,142,255,.55); }
+
+  .btn-primary {
+    @apply bg-primary text-on-primary font-headline font-bold rounded-full
+           transition-all duration-300;
+    box-shadow: 0 0 20px rgba(223,142,255,.25);
+  }
+  .btn-primary:hover {
+    box-shadow: 0 0 40px rgba(223,142,255,.55);
+    transform: scale(1.04);
+  }
+  .btn-primary:active { transform: scale(.96); }
+
+  .btn-glass {
+    @apply bg-white/5 backdrop-blur-xl text-on-surface font-headline
+           font-bold rounded-full transition-all duration-300;
+    border: 1px solid rgba(73,72,71,.2);
+  }
+  .btn-glass:hover { @apply bg-white/10; }
+}
+
+/* ── Material Symbols ──────────────────────────────────────────── */
+.material-symbols-outlined {
+  font-variation-settings: 'FILL' 0,'wght' 400,'GRAD' 0,'opsz' 24;
+  font-family: 'Material Symbols Outlined';
+  font-style: normal;
+  display: inline-block;
+  line-height: 1;
+  vertical-align: middle;
+  user-select: none;
+}
+
+/* ── Gradient Text ─────────────────────────────────────────────── */
+@layer utilities {
+  .text-gradient {
+    background: linear-gradient(135deg,#df8eff 0%,#ac89ff 50%,#bb00fc 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+  .text-gradient-lr {
+    background: linear-gradient(90deg,#df8eff,#ac89ff,#bb00fc);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+  .text-shimmer {
+    background: linear-gradient(90deg,#df8eff 0%,#fff 40%,#df8eff 60%,#ac89ff 100%);
+    background-size: 200% auto;
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: shimmer 3.5s linear infinite;
+  }
+}
+
+/* ── Page Transition ───────────────────────────────────────────── */
+#page-transition {
+  position: fixed; inset: 0;
+  background: #000; z-index: 9990;
+  pointer-events: none; opacity: 0;
+}
+
+/* ── Nav active ────────────────────────────────────────────────── */
+.nav-link-active {
+  color: #df8eff !important;
+  border-bottom: 2px solid #df8eff;
+  padding-bottom: 2px;
+}
