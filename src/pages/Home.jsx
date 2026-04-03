@@ -125,7 +125,7 @@ export default function Home() {
   ))} */}
             <span className="hero-word block w-fit bg-gradient-to-b from-purple-400 to-purple-900 bg-clip-text text-transparent"
               style={{ display: 'block' }}>
-              GuideMiee
+                สวัสดี
             </span>
           </h1>
 
