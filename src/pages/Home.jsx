@@ -106,49 +106,55 @@ export default function Home() {
   return (
     <div ref={containerRef}>
       {/* ── Hero ──────────────────────────────────────────────── */}
-      <section className="relative min-h-screen flex flex-col items-center justify-center px-6 overflow-hidden">
+      <section className="relative min-h-screen flex flex-col items-center px-6 overflow-hidden">
         <ParticleCanvas />
         {/* Ambient orb */}
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2
-                        w-[600px] h-[600px] bg-primary/10 blur-[130px] rounded-full pointer-events-none" />
+                  w-[600px] h-[600px] bg-primary/10 blur-[130px] rounded-full pointer-events-none" />
 
-        <div className="relative z-10 max-w-5xl mx-auto text-center">
-          <span className="hero-kicker inline-block text-primary text-sm uppercase
-                           tracking-[.3em] font-semibold mb-7">
-            Digital Architect
-          </span>
-          <h1 className="font-headline font-extrabold leading-[.9] tracking-tighter mb-8
-               text-7xl md:text-8xl lg:text-[10rem] mt-20"
-            style={{ perspective: '8px' }}>
-            {/* {['Crafting', 'Digital', 'Experiences'].map((w) => (
-    <span key={w} className="hero-word block w-fit bg-gradient-to-b from-purple-400 to-purple-900 bg-clip-text text-transparent" style={{ display: 'block' }}>{w}</span>
-  ))} */}
-            <span className="hero-word block w-fit bg-gradient-to-b from-purple-400 to-purple-900 bg-clip-text text-transparent"
-              style={{ display: 'block' }}>
-                สวัสดี
+        {/* Container หลัก: ทำให้สูงเต็มจอและใช้ Flex เพื่อแยกส่วนบน/กลาง/ล่าง */}
+        <div className="relative z-10 w-full max-w-5xl mx-auto flex flex-col justify-between min-h-screen py-10 text-center">
+
+          {/* ส่วนตรงกลาง: อาชีพ + สวัสดี (ใช้ flex-1 เพื่อให้มันดันตัวเองไปอยู่ตรงกลางจอ) */}
+          <div className="flex-1 flex flex-col justify-center items-center">
+            <span className="hero-kicker inline-block text-primary text-sm uppercase
+                       tracking-[.3em] font-semibold mb-6">
+              System analyst & UI/UX Designer
             </span>
-          </h1>
 
-          <p className="hero-subtitle max-w-xl mx-auto text-on-surface-variant
-                        text-lg md:text-xl font-body leading-relaxed mb-12 mt-20">
-            A Nocturnal Luminary building immersive interfaces and seamless
-            digital ecosystems for the next generation of the web.
-          </p>
-
-          <div className="hero-cta flex flex-wrap justify-center gap-6">
-            <button
-              onClick={() => navigate('/projects')}
-              className="btn-primary px-10 py-4 text-lg"
-            >
-              View Projects
-            </button>
-            <button
-              onClick={() => navigate('/experience')}
-              className="btn-glass px-10 py-4 text-lg"
-            >
-              My Process
-            </button>
+            <h1 className="font-headline font-extrabold leading-[.9] tracking-tighter
+                     text-7xl md:text-8xl lg:text-[10rem]"
+              style={{ perspective: '8px' }}>
+              {/* เพิ่ม mx-auto เข้าไปตรงนี้ เพื่อให้ w-fit ขยับมาอยู่กึ่งกลาง */}
+              <span className="hero-word mx-auto block w-fit bg-gradient-to-b from-purple-400 to-purple-900 bg-clip-text text-transparent">
+                สวัสดี
+              </span>
+            </h1>
           </div>
+
+          {/* ส่วนด้านล่าง: คำโปรย + ปุ่ม (mt-auto จะดันกลุ่มนี้ลงไปติดขอบล่างจอเสมอ) */}
+          <div className="mt-auto pb-4">
+            <p className="hero-subtitle max-w-xl mx-auto text-on-surface-variant
+                    text-lg md:text-xl font-body leading-relaxed mb-10">
+              Welcome to my digital space. I'm passionate about crafting immersive interfaces and seamless digital ecosystems.
+            </p>
+
+            <div className="hero-cta flex flex-wrap justify-center gap-6">
+              <button
+                onClick={() => navigate('/projects')}
+                className="btn-primary px-10 py-4 text-lg"
+              >
+                View Projects
+              </button>
+              <button
+                onClick={() => navigate('/experience')}
+                className="btn-glass px-10 py-4 text-lg"
+              >
+                My Process
+              </button>
+            </div>
+          </div>
+
         </div>
       </section>
 
