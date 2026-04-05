@@ -37,24 +37,25 @@ const LEVEL_STYLE = {
 
 // ── Technologies & Tools ─────────────────────────────────────────
 // เปลี่ยน src เป็น path รูปของจารย์ได้เลยครับ
+
 const TOOLS = [
-  { name: 'Git', src: 'src/images/git.png' },
-  { name: 'Github Desktop', src: 'src/images/github.jpg' },
-  { name: 'Figma', src: 'src/images/figma.png' },  // ← ใส่ path รูปที่นี่
-  { name: 'React.js', src: 'src/images/react.png' },
-  { name: 'Tailwind', src: 'src/images/TW.png' },
-  { name: 'Claude', src: 'src/images/claude.png' },
-  { name: 'Draw.io', src: 'src/images/draw.png' },
+  { name: 'Git', src: 'images/git.png' },
+  { name: 'Github Desktop', src: 'images/github.jpg' },
+  { name: 'Figma', src: 'images/figma.png' },  // ← ใส่ path รูปที่นี่
+  { name: 'React.js', src: 'images/react.png' },
+  { name: 'Tailwind', src: 'images/TW.png' },
+  { name: 'Claude', src: 'images/claude.png' },
+  { name: 'Draw.io', src: 'images/draw.png' },
 
 
 ]
 
 const Doc = [
-  { name: 'Canva', src: 'src/images/canva.png' },
-  { name: 'Capcut', src: 'src/images/capcut.jpg' },
-  { name: 'Word', src: 'src/images/word.png' },
-  { name: 'Excel', src: 'src/images/excel.png' },
-  { name: 'Powerpoint', src: 'src/images/powerpoint.png' },
+  { name: 'Canva', src: 'images/canva.png' },
+  { name: 'Capcut', src: 'images/capcut.jpg' },
+  { name: 'Word', src: 'images/word.png' },
+  { name: 'Excel', src: 'images/excel.png' },
+  { name: 'Powerpoint', src: 'images/powerpoint.png' },
 ]
 
 export default function Experience() {
