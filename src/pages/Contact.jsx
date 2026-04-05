@@ -1,15 +1,15 @@
 import { useRef, useState } from 'react'
-import gsap                  from 'gsap'
-import { ScrollTrigger }     from 'gsap/ScrollTrigger'
-import { useGSAP }           from '@gsap/react'
+import gsap from 'gsap'
+import { ScrollTrigger } from 'gsap/ScrollTrigger'
+import { useGSAP } from '@gsap/react'
 
 gsap.registerPlugin(ScrollTrigger)
 
 export default function Contact() {
-  const containerRef          = useRef(null)
+  const containerRef = useRef(null)
   const [sending, setSending] = useState(false)
-  const [sent,    setSent]    = useState(false)
-  const [form, setForm]       = useState({ name: '', email: '', message: '' })
+  const [sent, setSent] = useState(false)
+  const [form, setForm] = useState({ name: '', email: '', message: '' })
 
   useGSAP(() => {
     // Floating orbs
@@ -18,10 +18,10 @@ export default function Contact() {
 
     // Header entrance
     gsap.timeline({ delay: 0.2 })
-      .from('.page-kicker',     { opacity: 0, y: 22, duration: 0.5 })
-      .from('.contact-word',    { opacity: 0, y: 70, stagger: 0.07, duration: 0.85, ease: 'power4.out' }, '-=0.2')
-      .from('.contact-desc',    { opacity: 0, y: 22, duration: 0.5 }, '-=0.2')
-      .from('.contact-info > *',{ opacity: 0, x: -30, stagger: 0.12, duration: 0.5, ease: 'power3.out' }, '-=0.2')
+      .from('.page-kicker', { opacity: 0, y: 22, duration: 0.5 })
+      .from('.contact-word', { opacity: 0, y: 70, stagger: 0.07, duration: 0.85, ease: 'power4.out' }, '-=0.2')
+      .from('.contact-desc', { opacity: 0, y: 22, duration: 0.5 }, '-=0.2')
+      .from('.contact-info > *', { opacity: 0, x: -30, stagger: 0.12, duration: 0.5, ease: 'power3.out' }, '-=0.2')
 
     // Form panel
     gsap.from('.contact-form-panel', {
@@ -58,12 +58,14 @@ export default function Contact() {
                       text-on-surface placeholder:text-outline transition-all font-body`
 
   const infoItems = [
-    { icon: 'mail',        label: 'Email Me',  value: 'kai.gured@gmail.com' },
-    { icon: 'location_on', label: 'Location',  value: 'Thailand • GMT +99' },
+    { icon: 'mail', label: 'Email Me', value: 'kai.gured@gmail.com' },
+    { icon: 'location_on', label: 'Location', value: 'Bangkok Thailand • GMT +66' },
+    { icon: 'hub', label: 'Social', value: 'Look in my footer' },
+
   ]
 
   return (
-    <main ref={containerRef} className="relative min-h-screen pt-32 pb-20 overflow-hidden">
+    <main ref={containerRef} className="relative min-h-screen pt-32 pb-20 overflow-x-hidden">
 
       {/* Ambient orbs */}
       <div className="orb-tl absolute top-[-10%] left-[-10%] w-[50%] h-[50%]
@@ -120,16 +122,16 @@ export default function Contact() {
           {/* ── Right: Form ────────────────────────────────── */}
           <div className="lg:col-span-7">
             <div className="contact-form-panel glass-card p-8 md:p-12 rounded-xl
-                            border border-outline-variant/15 relative">
-              {/* Corner accent */}
-              <div className="absolute -top-px -right-px w-20 h-20
-                              bg-gradient-to-br from-primary/20 to-transparent rounded-tr-xl" />
+                            border border-outline-variant/15 relative overflow-hidden">
+              {/* Corner accent — subtle glow on border only */}
+              <div className="absolute -top-px -right-px w-32 h-32 pointer-events-none overflow-hidden"
+                   style={{ background: 'radial-gradient(circle at top right, rgba(223,142,255,0.18) 0%, transparent 70%)' }} />
 
               <form onSubmit={handleSubmit} className="space-y-8">
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                   {[
-                    { id: 'name',  label: 'Name',  type: 'text',  ph: 'Enter your full name' },
-                    { id: 'email', label: 'Email', type: 'email', ph: 'email@example.com'   },
+                    { id: 'name', label: 'Name', type: 'text', ph: 'Enter your full name' },
+                    { id: 'email', label: 'Email', type: 'email', ph: 'email@example.com' },
                   ].map(({ id, label, type, ph }) => (
                     <div key={id} className="space-y-2 group">
                       <label className="text-xs font-label uppercase tracking-widest
@@ -193,9 +195,10 @@ export default function Contact() {
                 </div>
               </form>
             </div>
-
-            {/* Decorative map */}
-            <div className="deco-map mt-8 rounded-xl overflow-hidden h-48 relative
+          </div>
+        </div>
+        {/* Decorative map */}
+        {/* <div className="deco-map mt-8 rounded-xl overflow-hidden h-48 relative
                             grayscale opacity-40 hover:grayscale-0 hover:opacity-80
                             transition-all duration-700">
               <img
@@ -204,10 +207,7 @@ export default function Contact() {
                 className="w-full h-full object-cover"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-background via-transparent to-transparent" />
-            </div>
-          </div>
-
-        </div>
+            </div> */}
       </div>
     </main>
   )

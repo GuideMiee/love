@@ -2,6 +2,7 @@ import { useRef, useState } from 'react'
 import gsap                  from 'gsap'
 import { ScrollTrigger }     from 'gsap/ScrollTrigger'
 import { useGSAP }           from '@gsap/react'
+import { useNavigate } from 'react-router-dom'
 
 gsap.registerPlugin(ScrollTrigger)
 
@@ -58,6 +59,7 @@ export default function Projects() {
   const containerRef        = useRef(null)
   const [active, setActive] = useState('All')
   const cardsRef            = useRef({})
+  const navigate = useNavigate()
 
   // Initial scroll reveal
   useGSAP(() => {
@@ -192,7 +194,7 @@ export default function Projects() {
           <p className="text-on-surface-variant max-w-xl mx-auto mb-10 text-lg">
             Let's build something that shines in the dark.
           </p>
-          <button className="btn-primary px-10 py-4 text-sm uppercase tracking-widest font-extrabold">
+          <button onClick={() => navigate('/contact')} className="btn-primary px-10 py-4 text-sm uppercase tracking-widest font-extrabold">
             Start a Conversation
           </button>
         </div>

@@ -137,9 +137,9 @@ export default function Home() {
         </div>
 
         {/* Zone 3 — Subtitle + CTA ล่างสุด */}
-        <div className="absolute bottom-12 inset-x-0 flex flex-col items-center gap-8 z-10 px-6">
+        <div className="absolute -bottom-10 left-0 right-0 flex flex-col items-center gap-8 p-6">
           <p className="hero-subtitle max-w-xl text-center text-on-surface-variant
-                        text-lg md:text-xl font-body leading-relaxed">
+                        text-md md:text-2xl font-body leading-relaxed">
             A Nocturnal Luminary building immersive interfaces and seamless
             digital ecosystems for the next generation of the web.
           </p>

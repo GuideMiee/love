@@ -2,7 +2,6 @@ const socials = [
   { label: 'LinkedIn', href: '#' },
   { label: 'GitHub',   href: '#' },
   { label: 'Layers',   href: '#' },
-  { label: 'Dribbble', href: '#' },
 ]
 
 export default function Footer() {
@@ -10,7 +9,7 @@ export default function Footer() {
     <footer className="w-full py-12 border-t border-outline-variant/15 bg-surface">
       <div className="flex flex-col md:flex-row justify-between items-center px-8 max-w-7xl mx-auto gap-6">
         <div className="text-lg font-bold text-primary font-headline uppercase tracking-widest">
-          NOCTURNAL
+         My site ˙∆˙
         </div>
         <div className="flex gap-8">
           {socials.map(({ label, href }) => (
@@ -26,7 +25,7 @@ export default function Footer() {
           ))}
         </div>
         <p className="text-on-surface-variant font-body text-sm uppercase tracking-widest">
-          © 2025 Nocturnal Luminary.
+          © 2026 GuideMiee.site
         </p>
       </div>
     </footer>
